@@ -12,16 +12,22 @@
 			<a href="<?php echo get_post_permalink(); ?>" title="the book" >
 			<?php
 			if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it.
-			  the_post_thumbnail();
+			  the_post_thumbnail("thumbnail");
 			}
 			?>
 			</a>
+			<!-- we know that every book has an author -->
+			<h2><?php the_field('author'); ?></h2>
 		<?php endwhile; ?>
 
 		<?php else : ?>
 			<?php get_template_part( 'content', 'none' ); ?>
 
+
+
 	<?php endif; // end have_posts() check ?>
+
+
 
 	<?php /* Display navigation to next/previous pages when applicable */ ?>
 	<?php if ( function_exists('FoundationPress_pagination') ) { FoundationPress_pagination(); } else if ( is_paged() ) { ?>
