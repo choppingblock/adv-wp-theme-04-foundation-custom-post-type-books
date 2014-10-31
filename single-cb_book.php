@@ -29,6 +29,31 @@
 				<?php wp_link_pages(array('before' => '<nav id="page-nav"><p>' . __('Pages:', 'FoundationPress'), 'after' => '</p></nav>' )); ?>
 				<p><?php the_tags(); ?></p>
 			</footer>
+
+			<?php 
+
+				$posts = get_field('related_book');
+
+				if( $posts ): ?>
+					<div class="related-books">
+				    <ul>
+				    <?php foreach( $posts as $post): // variable must be called $post (IMPORTANT) ?>
+				        <?php setup_postdata($post); ?>
+				        <li>
+				            <?php
+			if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it.
+			  the_post_thumbnail("thumbnail");
+			}
+			?>
+				            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+				            <span>Custom field from $post: <?php the_field('author'); ?></span>
+				        </li>
+				    <?php endforeach; ?>
+				    </ul>
+				    </div>
+				    <?php wp_reset_postdata(); // IMPORTANT - reset the $post object so the rest of the page works correctly ?>
+				<?php endif; ?>
+
 			<?php do_action('foundationPress_post_before_comments'); ?>
 			<?php comments_template(); ?>
 			<?php do_action('foundationPress_post_after_comments'); ?>
