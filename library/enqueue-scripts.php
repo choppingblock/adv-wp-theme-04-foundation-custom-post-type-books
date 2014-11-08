@@ -16,6 +16,10 @@ if (!function_exists('FoundationPress_scripts')) :
     wp_enqueue_script('jquery');
     wp_enqueue_script('foundation');
 
+    // enqueue styles
+    // added this in class on November 6, 2014
+    wp_enqueue_style( 'style-name', get_stylesheet_uri() );
+
   }
 
   add_action( 'wp_enqueue_scripts', 'FoundationPress_scripts' );
